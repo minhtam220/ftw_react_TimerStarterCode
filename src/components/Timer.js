@@ -1,19 +1,28 @@
 import React from "react";
-import { formatTime } from "../utils/formatTime";
 import useTimer from "../useTimer";
+import Display from "./Display";
 
-function Timer() {
-  const { time, startTimer, stopTimer, resetTimer, active } = useTimer(0);
+function Timer({ title }) {
+  const {
+    time,
+    startTimer,
+    stopTimer,
+    resetTimer,
+    splitTimer,
+    active,
+    splitTimes,
+  } = useTimer();
 
   return (
     <div>
-      <h1>Coder Timer 1</h1>
+      <h1>{title}</h1>
       <div className="timer__wrapper">
-        <div className="timer__display">
-          <p>{formatTime(time)}</p>
-        </div>
+        {splitTimes.current.map((time) => (
+          <Display time={time} />
+        ))}
+        <Display time={time} />
         <div className="button__wrapper">
-          <button className="button" onClick={startTimer}>
+          <button className="button" ref={active} onClick={startTimer}>
             Start
           </button>
           <button className="button" onClick={stopTimer}>
@@ -21,6 +30,9 @@ function Timer() {
           </button>
           <button className="button" onClick={resetTimer}>
             Reset
+          </button>
+          <button className="button" onClick={splitTimer}>
+            Split
           </button>
         </div>
       </div>
