@@ -1,5 +1,3 @@
-import { useState, useRef } from "react";
-import { formatTime } from "./utils/formatTime";
 import Timer from "./components/Timer";
 
 function App() {
